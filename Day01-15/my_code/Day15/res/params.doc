@@ -1,0 +1,42 @@
+t_dd_flow_param
+t_dd_process_form_param 钉钉流程参数表
+  id  
+  base_unit_id int8 根节点公司id
+  dd_flow_template_code varchar(128)  钉钉流程模板code
+  flow_id  varchar（64）枚举 收房新签/收房续签/出房新签/出房续租
+  field_key 表单字段英文名
+  filed_name 表单字段中文名
+  create_time int8
+  modify_time int8
+  deleted char(1)
+
+
+
+PROC-0C40A25D-5FDD-4B32-85A5-692A4503B44A 出房
+PROC-BB112882-2FAD-43BC-8367-039C1B4078ED 收房
+
+
+参数是 base_unit_id, flow_id, field_key数组[]
+返回，dd_flow_template_code和filed_name数组
+
+
+
+http://localhost:8090/api/v1/dingding/process_form_param
+http://localhost:8090/api/v1/dingding/process_form_param?base_unit_id=1077803801441579009&flow_id=1
+
+base_unit_id  1077803801441579009
+flow_id       1
+
+SELECT dd_flow_template_code,field_key,filed_name FROM t_dd_process_form_param WHERE base_unit_id = 1077803801441579009 AND flow_id=1 AND deleted=0
+
+
+insert into t_dd_process_form_param VALUES (row+1,'1077803801441579009','PROC-0C40A25D-5FDD-4B32-85A5-692A4503B44A',1,key,value,NULL, NULL, 0)
+
+
+字段问题整理：
+
+
+空调2P                (  规格、型号 SIFR   ;   数量 QUAN   ;    年限 USEDY  )                      传参
+
+
+
